@@ -3,7 +3,7 @@
   vars:
     user: vagrant
   tasks:
-  - name:    Install prerequisites cassandra
+  - name:    Install prerequisites Cassandra
     apt:     name={{item}} update_cache=yes
     with_items:
      - openjdk-8-jre
@@ -11,12 +11,12 @@
      - curl
      - software-properties-common
      - make
-  - name:    Add cassandra GPG key
+  - name:    Add Cassandra GPG key
     apt_key: url=https://www.apache.org/dist/cassandra/KEYS
-  - name:    Add Docker APT repository
+  - name:    Add Cassandra APT repository
     apt_repository:
       repo: deb http://www.apache.org/dist/cassandra/debian 311x main state=present
-  - name:    Install cassandra
+  - name:    Install Cassandra
     apt: name=cassandra state=present update_cache=yes
-  - name:   Make sure cassandra is started
+  - name:   Make sure Cassandra is started
     service: name=cassandra state=restarted

@@ -1,0 +1,22 @@
+- hosts: grafana
+  become: yes
+  vars:
+    user: vagrant
+  tasks:
+  - name:    Install prerequisites Grafana
+    apt:     name={{item}} update_cache=yes
+    with_items:
+     - adduser
+     - libfontconfig
+     - curl
+     - software-properties-common
+     - make
+  - name:    Add Grafana GPG key
+    apt_key: url=https://packagecloud.io/gpg.key
+  - name:    Add Grafana APT repository
+    apt_repository:
+      repo: deb https://packagecloud.io/grafana/stable/debian/ stretch main state=present
+  - name:    Install Grafana
+    apt: name=grafana state=present update_cache=yes
+  - name:   Make sure Grafana is started
+    service: name=grafana-server state=restarted
