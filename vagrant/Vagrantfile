@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+
+    config.vm.define "grafana" do |server|
+        server.vm.box = "ubuntu/xenial64"
+        server.vm.hostname = "grafana"
+        server.vm.network "private_network", ip: "10.0.0.3"
+    end
+
+    config.vm.define "node1" do |cicd|
+        cicd.vm.box = "ubuntu/xenial64"
+        cicd.vm.hostname = "node1"
+        cicd.vm.network "private_network", ip: "10.0.0.4"
+    end
+
+    config.vm.define "node2" do |server|
+        server.vm.box = "ubuntu/xenial64"
+        server.vm.hostname = "node2"
+        server.vm.network "private_network", ip: "10.0.0.5"
+    end
+
+    config.vm.define "node3" do |server|
+        server.vm.box = "ubuntu/xenial64"
+        server.vm.hostname = "node3"
+        server.vm.network "private_network", ip: "10.0.0.6"
+    end
+
+
+end
